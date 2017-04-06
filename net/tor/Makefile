@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tor
-PKG_VERSION:=0.2.7.6
-PKG_RELEASE:=2
+PKG_VERSION:=0.2.8.12
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://dist.torproject.org/ \
 	https://archive.torproject.org/tor-package-archive
-PKG_MD5SUM:=cc19107b57136a68e8c563bf2d35b072
+PKG_MD5SUM:=476f5074c2f77350010dcb52f6f8651d
 PKG_MAINTAINER:=Hauke Mehrtens <hauke@hauke-m.de>
 PKG_LICENSE_FILES:=LICENSE
 
@@ -40,7 +40,7 @@ endef
 define Package/tor
 $(call Package/tor/Default)
   TITLE:=An anonymous Internet communication system
-  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib
+  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib +obfsclient
 endef
 
 define Package/tor/description
@@ -89,6 +89,7 @@ define Package/tor/install
 	$(INSTALL_BIN) ./files/tor.init $(1)/etc/init.d/tor
 	$(INSTALL_DIR) $(1)/etc/tor
 	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/etc/tor/torrc.sample $(1)/etc/tor/torrc
+	touch $(PKG_INSTALL_DIR)/etc/tor/bridges $(PKG_INSTALL_DIR)/etc/tor/geoip $(PKG_INSTALL_DIR)/etc/tor/proxy
 endef
 
 define Package/tor-geoip/install
