@@ -40,7 +40,7 @@ endef
 define Package/tor
 $(call Package/tor/Default)
   TITLE:=An anonymous Internet communication system
-  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib +libcap
+  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib +libcap +obfsclient
 endef
 
 define Package/tor/description
@@ -120,6 +120,7 @@ define Package/tor/install
 	$(INSTALL_BIN) ./files/tor.init $(1)/etc/init.d/tor
 	$(INSTALL_DIR) $(1)/etc/tor
 	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/etc/tor/torrc.sample $(1)/etc/tor/torrc
+	touch $(PKG_INSTALL_DIR)/etc/tor/bridges $(PKG_INSTALL_DIR)/etc/tor/geoip $(PKG_INSTALL_DIR)/etc/tor/proxy
 endef
 
 define Package/tor-gencert/install
