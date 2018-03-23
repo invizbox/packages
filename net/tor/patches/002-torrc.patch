@@ -1,0 +1,17 @@
+--- a/src/config/torrc.sample.in
++++ b/src/config/torrc.sample.in
+@@ -203,3 +203,14 @@
+ #PublishServerDescriptor 0
+ 
+ User tor
++VirtualAddrNetwork 10.192.0.0/16
++TransPort 9040
++TransListenAddress 172.16.1.1
++DNSPort 9053
++DNSListenAddress 172.16.1.1
++AutomapHostsOnResolve 1
++AutomapHostsSuffixes .exit,.onion
++ControlPort 9051
++AvoidDiskWrites 1
++ClientTransportPlugin obfs2,obfs3,scramblesuit exec /usr/bin/obfsclient
++MapAddress inviz.box 10.153.146.1
