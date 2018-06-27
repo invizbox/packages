@@ -1,0 +1,14 @@
+--- a/src/config/torrc.sample.in
++++ b/src/config/torrc.sample.in
+@@ -228,3 +228,11 @@
+ #%include /etc/torrc.custom
+ 
+ User tor
++VirtualAddrNetworkIPv4 10.192.0.0/16
++TransPort 172.16.1.1:9040
++DNSPort 172.16.1.1:9053
++AutomapHostsOnResolve 1
++ControlPort 9051
++AvoidDiskWrites 1
++ClientTransportPlugin obfs2,obfs3,scramblesuit exec /usr/bin/obfsclient
++MapAddress inviz.box 10.153.146.1

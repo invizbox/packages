@@ -46,6 +46,7 @@ endef
 define Package/adblock/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) ./files/adblock.sh $(1)/usr/bin/
+	$(INSTALL_BIN) ./files/fix-adblock.sh $(1)/usr/bin/
 
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/adblock.init $(1)/etc/init.d/adblock
@@ -57,6 +58,15 @@ define Package/adblock/install
 	$(INSTALL_CONF) ./files/adblock.notify $(1)/etc/adblock/
 	$(INSTALL_CONF) ./files/adblock.blacklist $(1)/etc/adblock/
 	$(INSTALL_CONF) ./files/adblock.whitelist $(1)/etc/adblock/
+
+	$(INSTALL_DIR) $(1)/etc/uci-defaults
+	$(INSTALL_BIN) ./files/20-adblock $(1)/etc/uci-defaults/
+endef
+
+define Package/adblock/postinst
+#!/bin/sh
+[ -n "$${IPKG_INSTROOT}" ] || /usr/bin/fix-adblock.sh
+exit 0
 endef
 
 $(eval $(call BuildPackage,adblock))
