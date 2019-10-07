@@ -8,14 +8,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tor
-PKG_VERSION:=0.3.2.10
+PKG_VERSION:=0.3.5.8
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://dist.torproject.org/ \
 	https://archive.torproject.org/tor-package-archive
-PKG_HASH:=60df77c31dcf94fdd686c8ca8c34f3b70243b33a7344ecc0b719d5ca2617cbee
-PKG_MAINTAINER:=Hauke Mehrtens <hauke@hauke-m.de>
+PKG_HASH:=d5c56603942a8927670f50a4a469fb909e29d3571fdd013389d567e57abc0b47
+PKG_MAINTAINER:=Hauke Mehrtens <hauke@hauke-m.de> \
+		Peter Wagner <tripolar@gmx.at>
 PKG_LICENSE_FILES:=LICENSE
 
 PKG_INSTALL:=1
@@ -40,7 +41,7 @@ endef
 define Package/tor
 $(call Package/tor/Default)
   TITLE:=An anonymous Internet communication system
-  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib +libcap
+  DEPENDS:=+libevent2 +libopenssl +libpthread +librt +zlib +libcap +obfsclient
 endef
 
 define Package/tor/description
@@ -121,6 +122,8 @@ define Package/tor/install
 	$(INSTALL_BIN) ./files/tor.init $(1)/etc/init.d/tor
 	$(INSTALL_DIR) $(1)/etc/tor
 	$(INSTALL_CONF) $(PKG_INSTALL_DIR)/etc/tor/torrc.sample $(1)/etc/tor/torrc
+	$(INSTALL_DIR) $(1)/etc/config
+	$(INSTALL_CONF) ./files/tor.uci $(1)/etc/config/tor
 endef
 
 define Package/tor-gencert/install
