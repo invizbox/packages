@@ -359,10 +359,14 @@ f_extconf()
 			uci_config="dhcp"
 			if [ ${adb_enabled} -eq 1 ] && [ -z "$(uci_get dhcp "@dnsmasq[${adb_dnsinstance}]" serversfile | grep -Fo "${adb_dnsdir}/${adb_dnsfile}")" ]
 			then
-				uci_set dhcp "@dnsmasq[${adb_dnsinstance}]" serversfile "${adb_dnsdir}/${adb_dnsfile}"
+				for i in $(seq 0 $(($(grep "config dnsmasq" /etc/config/dhcp | wc -l)-1))); do
+					uci_set dhcp "@dnsmasq[${i}]" serversfile "${adb_dnsdir}/${adb_dnsfile}"
+				done
 			elif [ ${adb_enabled} -eq 0 ] && [ -n "$(uci_get dhcp "@dnsmasq[${adb_dnsinstance}]" serversfile | grep -Fo "${adb_dnsdir}/${adb_dnsfile}")" ]
 			then
-				uci_remove dhcp "@dnsmasq[${adb_dnsinstance}]" serversfile
+				for i in $(seq 0 $(($(grep "config dnsmasq" /etc/config/dhcp | wc -l)-1))); do
+					uci_remove dhcp "@dnsmasq[${i}]" serversfile
+				done
 			fi
 		;;
 		kresd)
