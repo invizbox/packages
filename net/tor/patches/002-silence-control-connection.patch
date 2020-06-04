@@ -1,0 +1,11 @@
+--- a/src/core/mainloop/connection.c
++++ b/src/core/mainloop/connection.c
+@@ -1828,7 +1828,7 @@ connection_handle_listener_read(connecti
+       log_info(LD_NET, "New SOCKS AF_UNIX connection opened");
+     }
+     if (new_type == CONN_TYPE_CONTROL) {
+-      log_notice(LD_CONTROL, "New control connection opened from %s.",
++      log_info(LD_CONTROL, "New control connection opened from %s.",
+                  fmt_and_decorate_addr(&addr));
+     }
+ 

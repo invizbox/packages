@@ -547,7 +547,6 @@ endef
 define Plugin/stroke/install
 	$(INSTALL_DIR) $(1)/etc/ipsec.d/aacerts
 	$(INSTALL_DIR) $(1)/etc/ipsec.d/acerts
-	$(INSTALL_DIR) $(1)/etc/ipsec.d/cacerts
 	$(INSTALL_DIR) $(1)/etc/ipsec.d/certs
 	$(INSTALL_DIR) $(1)/etc/ipsec.d/crls
 	$(INSTALL_DIR) $(1)/etc/ipsec.d/ocspcerts

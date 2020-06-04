@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fping
-PKG_VERSION:=4.0
-PKG_RELEASE:=2
+PKG_VERSION:=4.1
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://fping.org/dist/
-PKG_HASH:=67eb4152b98ad34f99d2eec4e1098a0bb52caf13c0c89cd147349d08190fe8ce
+PKG_HASH:=2733e2a18cc2b5b935c4e3b5b84ccf2080c38043f1864d7c43326e8048ddab73
 
 PKG_MAINTAINER:=Nikil Mehta <nikil.mehta@gmail.com>
 PKG_LICENSE:=BSD-4-Clause
@@ -33,9 +33,9 @@ endef
 
 define Package/fping/description
 	fping is a ping like program which uses the Internet Control Message Protocol
-	(ICMP) echo request to determine if a target host is responding.  fping
+	(ICMP) echo request to determine if a target host is responding. fping
 	differs from ping in that you can specify any number of targets on the command
-	line, or specify a file containing the lists of targets to ping.  Instead of
+	line, or specify a file containing the lists of targets to ping. Instead of
 	sending to one target until it times out or replies, fping will send out a
 	ping packet and move on to the next target in a round-robin fashion.
 endef

@@ -21,6 +21,23 @@ start_service() {
 		chgrp www-data /var/log/lighttpd
 	}
 
+    openssl x509 -in /etc/lighttpd/inviz.box.pem -noout 2>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Building inviz.box.pem at lighttpd startup"
+        openssl req \
+        -x509 \
+        -config /etc/openssl-inviz.box.config \
+        -newkey rsa:4096 \
+        -nodes \
+        -days 5844 \
+        -keyout /tmp/inviz.box.key \
+        -out /tmp/inviz.box.crt
+
+        # create pem file
+        cat /tmp/inviz.box.key /tmp/inviz.box.crt > /etc/lighttpd/inviz.box.pem
+        fsync /etc/lighttpd/inviz.box.pem
+    fi
+
 	validate_conf || exit 1
 
 	procd_open_instance
